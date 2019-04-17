@@ -81,9 +81,9 @@ Game.prototype.startLoop = function () {
     this.frameCount++;
     console.log(this.frameCount);
     this.frameCount < 100 ? this.level01() : null;
-    this.frameCount > 100 && this.frameCount < 1000 ? this.level02() : null;
-    this.frameCount > 1000 && this.frameCount < 6000 ? this.level02() : null;
-    this.frameCount > 6000 && this.frameCount < 10000 ? this.level02() : null;
+    this.frameCount > 100 && this.frameCount < 300 ? this.level02() : null;
+    this.frameCount > 300 && this.frameCount < 600 ? this.level02() : null;
+    this.frameCount > 600 && this.frameCount < 10000 ? this.level02() : null;
     /*function level01 (canvas, people) {
 
 
