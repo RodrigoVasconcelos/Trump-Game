@@ -14,22 +14,58 @@ function Game(canvas) {
 
 var popImages = ["one", "two", "three"];
 
+
+//--------Level 01--------//
+
 Game.prototype.level01 = function () {
   if(Math.random() > 0.99) {
     const randomNumber = (Math.random() * this.canvas.height);
-
+    
     this.people.push(new People(this.canvas, randomNumber));
   } 
   console.log('01');
 }
+
+//--------Level 02--------//
 Game.prototype.level02 = function () {
   if(Math.random() > 0.98) {
     const randomNumber = (Math.random() * this.canvas.height);
-
+    
     this.people.push(new People(this.canvas, randomNumber));
   } 
   console.log('02');
 }
+
+//--------Level 03--------//
+Game.prototype.level03 = function () {
+  if(Math.random() > 0.98) {
+    const randomNumber = Math.random() * this.canvas.height;
+    
+    this.people.push(new People(this.canvas, randomNumber));
+  }
+  if(Math.random() > 0.995) {
+    const randomNumber = Math.random() * this.canvas.height;
+    
+    this.american.push(new American(this.canvas, randomNumber));
+  }
+  console.log('03');
+} 
+
+//--------Level 03--------//
+Game.prototype.level04 =  function () {
+  if(Math.random() > 0.985) {
+    const randomNumber = Math.random() * this.canvas.height;
+
+  this.people.push(new People(this.canvas, randomNumber));
+  }
+  if(Math.random() > 0.992) {
+  const randomNumber = Math.random() * this.canvas.height;
+
+  this.american.push(new American(this.canvas, randomNumber));
+  }
+  console.log('04');
+}
+
 
 Game.prototype.startLoop = function () {
 
@@ -45,51 +81,12 @@ Game.prototype.startLoop = function () {
     this.frameCount++;
     console.log(this.frameCount);
     this.frameCount < 100 ? this.level01() : null;
-    this.frameCount > 100 && this.frameCount < 6000 ? this.level02() : null;
+    this.frameCount > 100 && this.frameCount < 1000 ? this.level02() : null;
+    this.frameCount > 1000 && this.frameCount < 6000 ? this.level02() : null;
+    this.frameCount > 6000 && this.frameCount < 10000 ? this.level02() : null;
     /*function level01 (canvas, people) {
-      if(Math.random() > 0.995) {
-        const randomNumber = (Math.random() * canvas.height);
 
-        people.push(new People(canvas, randomNumber));
-      } console.log('01');
-    };
 
-    function level02 (canvas, people) {
-      if(Math.random() > 0.99) {
-        const randomNumber = (Math.random() * canvas.height);
-
-        people.push(new People(canvas, randomNumber));
-      } console.log('02');
-    
-    };
-
-    function level03 (canvas, people, american) {
-      if(Math.random() > 0.99) {
-        const randomNumber = Math.random() * canvas.height;
-
-      people.push(new People(canvas, randomNumber));
-      }
-      if(Math.random() > 0.995) {
-      const randomNumber = Math.random() * canvas.height;
-
-      american.push(new American(canvas, randomNumber));
-      }
-      console.log('03');
-    } 
-
-    function level04 (canvas, people, american) {
-      if(Math.random() > 0.985) {
-        const randomNumber = Math.random() * canvas.height;
-
-      people.push(new People(canvas, randomNumber));
-      }
-      if(Math.random() > 0.992) {
-      const randomNumber = Math.random() * canvas.height;
-
-      american.push(new American(canvas, randomNumber));
-      }
-      console.log('04');
-    }
 
     setTimeout(level01(this.canvas, this.people),0);
 
@@ -162,6 +159,7 @@ Game.prototype.escapeTrump = function () {
     if (people.y < this.canvas.height/2 - this.trump.size/2) {
       this.trump.setLives();
       ///////////////////////////////////
+      // let placeholderImage = new PlaceHolder(canvas,people.x,people.y)
       this.people.splice(index, 1);
       this.survivers.push(people);
     }
