@@ -1,7 +1,7 @@
 'use strict';
 
+    var gameAudio = new Audio('./audio/USA National Anthem Techno Remix.mp3');
 
-var gameAudio = new Audio('../audio/USA National Anthem Techno Remix.mp3');
 
 function main() {
 
@@ -25,11 +25,9 @@ function main() {
     </section>
     `);
 
-    gameAudio.play();
-    gameAudio.addEventListener('ended', function() {
-    this.currentTime = 0;
-    this.play();
-    }, false);
+
+
+    
 
     const starButton = document.querySelector('.start-button');
 
@@ -64,6 +62,12 @@ function main() {
     <canvas></canvas>
     </section>
     `);
+
+    gameAudio.play();
+    gameAudio.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+    }, false);
 
     const gameContainerElement = document.querySelector('.game-container');
 
