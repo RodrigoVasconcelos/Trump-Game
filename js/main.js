@@ -1,5 +1,8 @@
 'use strict';
 
+
+var gameAudio = new Audio('../audio/USA National Anthem Techno Remix.mp3');
+
 function main() {
 
   const mainElement = document.querySelector('main');
@@ -22,6 +25,12 @@ function main() {
     </section>
     `);
 
+    gameAudio.play();
+    gameAudio.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+    }, false);
+
     const starButton = document.querySelector('.start-button');
 
     starButton.addEventListener('click', buildGameScreen);
@@ -42,7 +51,7 @@ function main() {
     <header class="header">
     <div class="side-bar">
       <p>Time</p>
-      <p class="timer"></p>
+      <p class="chronotime">00:00:00</p>
     </div>
     <img class="logo" src="./img/game-logo-03.svg" alt="Shall Not Pass">
     <div class="side-bar">
@@ -64,12 +73,11 @@ function main() {
     const  canvasElement = document.querySelector('canvas');
     canvasElement.setAttribute('width', width);
     canvasElement.setAttribute('height', height); 
-    
-    const timerHtml = document.querySelector('.timer');
 
-    const game = new Game(canvasElement);  
+
+    const game = new Game(canvasElement);
     
-    game.startLoop();
+    game.startLoop();    
 
     game.setGameOverCallback(buildGameOverScreen);
     
@@ -123,5 +131,7 @@ function main() {
   
 
 }
+
+
 
 window.addEventListener('load', main);
