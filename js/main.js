@@ -1,6 +1,6 @@
 'use strict';
 
-    var gameAudio = new Audio('./audio/USANationalAnthemTechnoRemix.mp3');
+    var gameAudio = new Audio('audio/USANationalAnthemTechnoRemix.mp3');
 
 
 function main() {
