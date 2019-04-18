@@ -1,6 +1,7 @@
 'use strict';
 
-    var gameAudio = new Audio('audio/USANationalAnthemTechnoRemix.mp3');
+  var gameAudio = new Audio('audio/USANationalAnthemTechnoRemix.mp3');
+  var audio32doh = new Audio("audio/32 Dohs from many episodes .mp3");
 
 
 function main() {
@@ -31,7 +32,9 @@ function main() {
 
     const starButton = document.querySelector('.start-button');
 
-    starButton.addEventListener('click', buildGameScreen);
+    starButton.addEventListener('click', function() {
+      buildGameScreen();
+      });
 
     window.onkeydown = function(event) {
       if(event.keyCode === 32) {
@@ -83,7 +86,7 @@ function main() {
     
     game.startLoop();    
 
-    game.setGameOverCallback(buildGameOverScreen);
+    game.setGameOverCallback(buildGameOverScreen, startMusic, stopMusic);
     
     document.addEventListener('keydown', function (event) {
 
@@ -109,6 +112,7 @@ function main() {
 
 
   function buildGameOverScreen() {
+
     const gameOverScreen = buildDom(`
       <section class="gameover-window">
         <h1>GAME OVER</h1>
@@ -118,7 +122,10 @@ function main() {
 
     //button restart
     const restartButton = document.querySelector('.restart-button');
-    restartButton.addEventListener('click', buildGameScreen);
+    restartButton.addEventListener('click', function(){
+      buildGameScreen();
+      stopMusic();
+      });
 
     //space key reset
     window.onkeydown = function(event) {
@@ -132,7 +139,13 @@ function main() {
 
   buildSplashScreen();
 
-  
+  let stopMusic = () => {
+    audio32doh.pause();
+    audio32doh.currentTime = 0;
+  }
+   let startMusic = () => {
+    audio32doh.play();
+  }
 
 }
 

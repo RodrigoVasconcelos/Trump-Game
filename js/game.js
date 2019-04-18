@@ -7,15 +7,33 @@ function Game(canvas) {
   this.canvas = canvas;
   this.ctx = this.canvas.getContext('2d');
   this.gameOver = false;
-  this.survivers = [];
   this.pressedKeys = [];
   this.frameCount = 0;
   this.placeholderImage = [];
 }
 
 
-var audioDoh = new Audio("./audio/32 Dohs from many episodes .mp3");
-//var popImages = ["one", "two", "three"];
+var audioDoh = new Audio("audio/Doh.mp3");
+var audioWrong = new Audio("audio/donald-trump-wrong-sound-effect.mp3");
+var audioHeartIt = new Audio("audio/Nooo DJT.mp3");
+var audioGoodJob = new Audio("audio/Good Job.mp3");
+var audioDont = new Audio("audio/Dont hurt him.mp3");
+var audioFake = new Audio("audio/donald-trump-fake-news-sound-effect.mp3");
+
+function niceTrumpSounds () {
+  var randomNumber = Math.floor(Math.random()*100);
+
+  if (randomNumber < 10) {
+    audioGoodJob.play();
+  } else if (randomNumber >= 30 && randomNumber < 40) {
+      audioDont.play();
+  } else if  (randomNumber >= 40 && randomNumber < 50) {
+      audioFake.play();
+  }
+}
+
+
+
 
 
 //--------Level 01--------//
@@ -124,6 +142,11 @@ Game.prototype.updateCanvas = function () {
   this.american.forEach(function(american) {
     american.update();
   });
+
+  this.placeholderImage.forEach( (placeHolder) => {
+    placeHolder.update(this.trump.x,this.trump.y);
+  }
+  )
 }
 
 Game.prototype.drawCanvas = function () {
@@ -139,7 +162,7 @@ Game.prototype.drawCanvas = function () {
     placeHolder.draw();
     setTimeout(()=>{
      
-      this.placeholderImage.splice(index,1)},2000);
+      this.placeholderImage.splice(index,1)},1200);
   })
 }
 
@@ -149,22 +172,32 @@ Game.prototype.escapeTrump = function () {
 
     if (people.y < this.canvas.height/2 - this.trump.size/2) {
       this.trump.setLives();
-      ///////////////////////////////////
-      // let placeholderImage = new PlaceHolder(canvas,people.x,people.y)
 
       let placeHolder = new PlaceholderImage (this.canvas, this.trump.x, this.trump.y, this.people.x, this.people.y);
 
       placeHolder.image(this.canvas, this.trump.x, this.trump.y, people.x, people.y);
-      console.log(placeHolder)
       this.placeholderImage.push(placeHolder)
 
       this.people.splice(index, 1);
-      this.survivers.push(people);
+
+      var randomNumber = Math.floor(Math.random()*100);
+
+
+      if (randomNumber <= 33) {
+        audioDoh.play();      
+      } else if (randomNumber > 33 && randomNumber <= 66) {
+        audioWrong.play();
+      } else {
+        audioHeartIt.play();
+      }
     }
 
     if (this.trump.lives === 0) {
+      this.startMusic();
       this.gameOver = true;
-      this.onGameOver();
+      setTimeout( () =>{
+         this.onGameOver();
+      }, 3000);
     }    
   })
 }
@@ -174,8 +207,8 @@ Game.prototype.checkCollisions = function () {
     const isCollidingPeople = this.trump.checkCollisionsWithPeople(people);
     
     if(isCollidingPeople) {
-
-      audioDoh.play();      
+      
+      niceTrumpSounds ();
       this.people.splice(index, 1);
       this.trump.setScore();
     }
@@ -184,6 +217,8 @@ Game.prototype.checkCollisions = function () {
     const isCollidingAmerican = this.trump.checkCollisionsWithAmerican(american);
 
     if (isCollidingAmerican) {
+
+
       this.american.splice(index, 1);
       this.trump.setLives();
     }
@@ -191,6 +226,8 @@ Game.prototype.checkCollisions = function () {
 }
 
 
-Game.prototype.setGameOverCallback = function (buildGameOverScreen) {
+Game.prototype.setGameOverCallback = function (buildGameOverScreen, startMusic, stopMusic) {
   this.onGameOver = buildGameOverScreen;
+  this.startMusic = function() {startMusic()}
+  //this.stopMusic = function(){stopMusic()}
 }
