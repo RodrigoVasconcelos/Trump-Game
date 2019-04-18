@@ -10,9 +10,12 @@ function Game(canvas) {
   this.survivers = [];
   this.pressedKeys = [];
   this.frameCount = 0;
+  this.placeholderImage = [];
 }
 
-var popImages = ["one", "two", "three"];
+
+var audioDoh = new Audio("./audio/32 Dohs from many episodes .mp3");
+//var popImages = ["one", "two", "three"];
 
 
 //--------Level 01--------//
@@ -131,6 +134,13 @@ Game.prototype.drawCanvas = function () {
   this.american.forEach(function(american) {
     american.draw();
   });
+  this.placeholderImage.forEach((placeHolder,index) => {
+
+    placeHolder.draw();
+    setTimeout(()=>{
+     
+      this.placeholderImage.splice(index,1)},2000);
+  })
 }
 
 Game.prototype.escapeTrump = function () {
@@ -142,10 +152,11 @@ Game.prototype.escapeTrump = function () {
       ///////////////////////////////////
       // let placeholderImage = new PlaceHolder(canvas,people.x,people.y)
 
-      let  placeholderImage = new PlaceholderImage (this.canvas, this.trump.x, this.trump.y, this.people.x, this.people.y);
+      let placeHolder = new PlaceholderImage (this.canvas, this.trump.x, this.trump.y, this.people.x, this.people.y);
 
-      placeholderImage.draw(this.canvas, this.trump.x, this.trump.y, this.people.x, this.people.y);
-
+      placeHolder.image(this.canvas, this.trump.x, this.trump.y, people.x, people.y);
+      console.log(placeHolder)
+      this.placeholderImage.push(placeHolder)
 
       this.people.splice(index, 1);
       this.survivers.push(people);
@@ -163,7 +174,8 @@ Game.prototype.checkCollisions = function () {
     const isCollidingPeople = this.trump.checkCollisionsWithPeople(people);
     
     if(isCollidingPeople) {
-      
+
+      audioDoh.play();      
       this.people.splice(index, 1);
       this.trump.setScore();
     }
