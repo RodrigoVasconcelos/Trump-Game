@@ -218,6 +218,10 @@ Game.prototype.checkCollisions = function () {
 
     if (isCollidingAmerican) {
 
+      let placeHolder = new PlaceholderImage (this.canvas, this.trump.x, this.trump.y, this.people.x, this.people.y);
+
+      placeHolder.image(this.canvas, this.trump.x, this.trump.y);
+      this.placeholderImage.push(placeHolder)
 
       this.american.splice(index, 1);
       this.trump.setLives();
