@@ -11,6 +11,7 @@ function Game(canvas) {
   this.frameCount = 0;
   this.placeholderImage = [];
   this.powerups = [];
+
 }
 
 
@@ -102,8 +103,12 @@ Game.prototype.startLoop = function () {
     this.frameCount > 600 && this.frameCount < 1500 ? this.level02() : null;
     this.frameCount > 1500 && this.frameCount < 2700 ? this.level03() : null;
     this.frameCount > 2700 && this.frameCount < 4200 ? this.level04() : null;
-    if (Math.random() > 0.99) {
+    if (Math.random() > 0.9995) {
       this.powerups.push(new Sombrero(this.canvas));
+    }
+
+    if (Math.random() > 0.9995) {
+      this.powerups.push(new Lives(this.canvas));
     }
 
 
@@ -209,6 +214,8 @@ Game.prototype.escapeTrump = function () {
   })
 }
 
+
+///
 Game.prototype.checkCollisions = function () {
   this.people.forEach((people,  index) => {
     const isCollidingPeople = this.trump.checkCollisionsWithPeople(people);
@@ -219,7 +226,33 @@ Game.prototype.checkCollisions = function () {
       this.people.splice(index, 1);
       this.trump.setScore();
     }
+  this.powerups.forEach((powerUp, index) => {
+    if(this.trump.checkCollisionsWithPowerUp(powerUp) && powerUp.type === "sombrero"){
+      this.powerups.splice(index,1);
+      this.trumpWearingSombrero = true;
+      setTimeout(()=>{this.trumpWearingSombrero = false}, 1000)
+      }
+    if(this.trumpWearingSombrero){
+      this.trump.img.src = './img/trump-sombrero-14.png';
+      this.trump.width = 1.33;
+      this.trump.size = 120;
+    } else {
+       this.trump.img.src = './img/T-02.png';
+      this.trump.width = 1;
+      this.trump.size = 90;
+    }
+
+    if(this.trump.checkCollisionsWithPowerUp(powerUp) && powerUp.type === "lives") {
+      this.trump.lives++;
+      this.powerups.splice(index,1);
+    }
+      
+    })
   });
+
+
+
+
 
   this.american.forEach((american, index) => {
     const isCollidingAmerican = this.trump.checkCollisionsWithAmerican(american);

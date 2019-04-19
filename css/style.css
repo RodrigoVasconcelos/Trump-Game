@@ -56,7 +56,7 @@ header {
 
 /*----------START WINDOW----------*/
 
-.start-window, .gameover-window{
+.start-window {
   background-color: rgb(255, 255, 255, 0.9);
   border-radius: 50px; 
   
@@ -108,12 +108,11 @@ header {
 .instructions {
   padding-left: 50px;
   padding-right: 50px;
-  padding-bottom: 30px;
+  padding-bottom:30px;
 }
 
 .instructions .trump{
-  width: 385px;
-  height: 110px;
+  height: 70px;
 }
 
 .instructions h1, .instructions p{
@@ -136,9 +135,17 @@ header {
   padding-right: 70px;
 }
 
+.instructions .start-button{
+  display: flex;
+  align-content: flex-end;
+}
+
 .instructions .arrow{
-  width: 1%;
-  height: 10px;
+  display:flex;
+  justify-content: flex-start;
+  height: 60px;
+  margin:0;
+  margin-top:-30px;
 }
 
 
@@ -158,10 +165,24 @@ canvas {
 
 /*----------GameOver WINDOW----------*/
 
+.gameover-window {
+  background-color: rgb(255, 255, 255, 0.9);
+  border-radius: 50px; 
+  
+  height: 60%;
+  width: 70%;
+
+  align-content: space-around;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
 .gameover-window img{
-  margin-top: 10px;
-  height: 300px;
-  margin-bottom: 10px;
+  width: 300px;
+  margin: 40px auto 0;
 }
 
 .restart-button {
@@ -175,7 +196,7 @@ canvas {
   font-family: 'Lobster', cursive;
   justify-content: center;
   height: 50px;
-  margin: 0 auto;
+  margin: 40px auto;
   text-align: center;
   width: 40%;
 }
@@ -192,8 +213,9 @@ canvas {
 
 
 footer {
-  position: fixed;
   bottom: 0;
+  color: white;
+  position: fixed;
   text-align: center;
   width: 700px;
 }

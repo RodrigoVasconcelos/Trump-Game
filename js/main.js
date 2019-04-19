@@ -54,6 +54,7 @@ function main() {
     <h1>Instructions:</h1>
     <p>slide Trump left and right using the arrows to catch the emigrants!!</p>
     <p class="right">Be careful with the americans!!</p>
+    <img class="arrow" src="./img/arrow.gif">
     </div>
     <div>
     <input  class="start-button" type="button" value="Start">
@@ -61,7 +62,6 @@ function main() {
     </section>
     `);
 
-    //<img class="arrow" src="./img/arrow.gif">
 
 
     
@@ -145,7 +145,7 @@ function main() {
 
     const gameOverScreen = buildDom(`
       <section class="gameover-window">
-        <h1>GAME OVER</h1>
+        <img src="./img/gameover.gif">
         <button class="restart-button">Restart</buttton>
       </section>
     `);

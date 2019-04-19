@@ -60,11 +60,12 @@ Trump.prototype.checkCollisionsWithAmerican = function (american) {
   return collisionsRightAmerican && collisionsLeftAmerican && collisionsTopAmerican && collisionsBottomAmerican;
 };
 
-Trump.prototype.checkCollisionsWithSombrero = function (sombrero) {
-  const collisionsRightSombrero = this.x + this.size/2 > sombrero.x - sombrero.size/2;
-  const collisionsLeftSombrero = this.x - this.size/2 < sombrero.x + sombrero.size/2;
-  const collisionsTopSombrero = this.y - this.size/4 < sombrero.y + sombrero.size/2;
-  const collisionsBottomSombrero = this.y + this.size/4 > sombrero.y - sombrero.size/2;
+Trump.prototype.checkCollisionsWithPowerUp = function (powerUp) {
+  
+  const collisionsRightPowerUp = this.x + this.size/2 > powerUp.x - powerUp.size/2;
+  const collisionsLeftPowerUp = this.x - this.size/2 < powerUp.x + powerUp.size/2;
+  const collisionsTopPowerUp = this.y - this.size/4 < powerUp.y + powerUp.size/2;
+  const collisionsBottomPowerUp = this.y + this.size/4 > powerUp.y - powerUp.size/2;
 
-  return collisionsRightSombrero && collisionsLeftSombrero && collisionsTopSombrero && collisionsBottomSombrero;
+  return collisionsRightPowerUp && collisionsLeftPowerUp && collisionsTopPowerUp && collisionsBottomPowerUp;
 };

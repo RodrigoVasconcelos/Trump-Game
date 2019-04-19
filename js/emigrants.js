@@ -9,9 +9,16 @@ function People (canvas, x) {
   this.y = this.canvas.height;
   this.x = x;
   this.img = new Image();
-  this.img.src = './img/people-03.png';
+  this.img.src = `./img/${mexImage[randomNum()]}`;
   this.increase = Math.random() * 4;
 }
+
+let mexImage = ['mexican-21.png', 'mexican-22.png', 'mexican-23.png', 'mexican-24.png'];
+
+var randomNum = function () {
+  var result = Math.floor(Math.random()*4)
+  return result;
+};
 
 People.prototype.draw = function () {
   this.ctx.drawImage(this.img, this.x - this.size/2, this.y - this.size/2, this.size, this.size);
