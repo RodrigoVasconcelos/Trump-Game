@@ -10,6 +10,7 @@ function Game(canvas) {
   this.pressedKeys = [];
   this.frameCount = 0;
   this.placeholderImage = [];
+  this.powerups = [];
 }
 
 
@@ -62,21 +63,21 @@ Game.prototype.level03 = function () {
     
     this.people.push(new People(this.canvas, randomNumber));
   }
-  if(Math.random() > 0.995) {
+  if(Math.random() > 0.997) {
     const randomNumber = Math.random() * this.canvas.height;
     
     this.american.push(new American(this.canvas, randomNumber));
   }
 } 
 
-//--------Level 03--------//
+//--------Level 04--------//
 Game.prototype.level04 =  function () {
   if(Math.random() > 0.98) {
     const randomNumber = Math.random() * this.canvas.height;
 
   this.people.push(new People(this.canvas, randomNumber));
   }
-  if(Math.random() > 0.993) {
+  if(Math.random() > 0.996) {
   const randomNumber = Math.random() * this.canvas.height;
 
   this.american.push(new American(this.canvas, randomNumber));
@@ -101,7 +102,10 @@ Game.prototype.startLoop = function () {
     this.frameCount > 600 && this.frameCount < 1500 ? this.level02() : null;
     this.frameCount > 1500 && this.frameCount < 2700 ? this.level03() : null;
     this.frameCount > 2700 && this.frameCount < 4200 ? this.level04() : null;
-    
+    if (Math.random() > 0.99) {
+      this.powerups.push(new Sombrero(this.canvas));
+    }
+
 
     this.clearCanvas();
     this.updateCanvas();
@@ -164,6 +168,9 @@ Game.prototype.drawCanvas = function () {
      
       this.placeholderImage.splice(index,1)},1200);
   })
+  this.powerups.forEach(function (powerup) {
+    powerup.draw();
+  })
 }
 
 Game.prototype.escapeTrump = function () {
@@ -197,7 +204,7 @@ Game.prototype.escapeTrump = function () {
       this.gameOver = true;
       setTimeout( () =>{
          this.onGameOver();
-      }, 3000);
+      }, 2000);
     }    
   })
 }
@@ -213,6 +220,7 @@ Game.prototype.checkCollisions = function () {
       this.trump.setScore();
     }
   });
+
   this.american.forEach((american, index) => {
     const isCollidingAmerican = this.trump.checkCollisionsWithAmerican(american);
 
@@ -225,13 +233,24 @@ Game.prototype.checkCollisions = function () {
 
       this.american.splice(index, 1);
       this.trump.setLives();
+
+      if (this.trump.lives === 0) {
+        this.startMusic();
+        this.gameOver = true;
+        setTimeout( () =>{
+        this.onGameOver();
+        }, 2000);
+      }
     }
-  }) 
-}
+  })
+};
+
+
+
+
 
 
 Game.prototype.setGameOverCallback = function (buildGameOverScreen, startMusic, stopMusic) {
   this.onGameOver = buildGameOverScreen;
   this.startMusic = function() {startMusic()}
-  //this.stopMusic = function(){stopMusic()}
 }

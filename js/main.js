@@ -32,9 +32,43 @@ function main() {
 
     const starButton = document.querySelector('.start-button');
 
-    starButton.addEventListener('click', function() {
-      buildGameScreen();
-      });
+    starButton.addEventListener('click',buildIntructuionScreen);
+
+    window.onkeydown = function(event) {
+      if(event.keyCode === 32) {
+        event.preventDefault();
+        document.querySelector('.start-button').click();
+    }
+    };  
+  };
+
+
+  //-------BUILD Instruction SCREEN-------//
+
+    function buildIntructuionScreen() {
+    const splashScreen = buildDom(`
+    <section  class="start-window">
+    
+    <div class="instructions">
+    <img src="./img/trump-slide.gif" class="trump">
+    <h1>Instructions:</h1>
+    <p>slide Trump left and right using the arrows to catch the emigrants!!</p>
+    <p class="right">Be careful with the americans!!</p>
+    </div>
+    <div>
+    <input  class="start-button" type="button" value="Start">
+    </div>
+    </section>
+    `);
+
+    //<img class="arrow" src="./img/arrow.gif">
+
+
+    
+
+    const starButton = document.querySelector('.start-button');
+
+    starButton.addEventListener('click',buildGameScreen);
 
     window.onkeydown = function(event) {
       if(event.keyCode === 32) {
@@ -50,10 +84,6 @@ function main() {
   function buildGameScreen() {
     const gameScreen = buildDom(`
     <header class="header">
-    <div class="side-bar">
-      <p>Time</p>
-      <p class="chronotime">00:00:00</p>
-    </div>
     <img class="logo" src="./img/game-logo-03.svg" alt="Shall Not Pass">
     <div class="side-bar">
       <p>Lives:  <span class="lives-value">0</span></p>

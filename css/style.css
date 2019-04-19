@@ -102,6 +102,46 @@ header {
   -o-box-shadow: 0 .1em 1em;
 }
 
+
+/*----------GAME CANVAS----------*/
+
+.instructions {
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 30px;
+}
+
+.instructions .trump{
+  width: 385px;
+  height: 110px;
+}
+
+.instructions h1, .instructions p{
+  font-family: 'Lobster', cursive;
+  text-align: left;
+}
+
+.instructions h1 {
+  color:  rgb(255, 165, 0);
+  font-size: 1.6rem;
+  padding-left: 40px;
+}
+
+.instructions p {
+  font-size: 1.2rem;
+}
+
+.instructions .right {
+  text-align: right;
+  padding-right: 70px;
+}
+
+.instructions .arrow{
+  width: 1%;
+  height: 10px;
+}
+
+
 /*----------GAME CANVAS----------*/
 
 .game-container {

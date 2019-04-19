@@ -6,6 +6,7 @@ function Trump (canvas) {
   this.x = this.canvas.width/2;
   this.y = this.canvas.height/2 - 10;
   this.size = 90;
+  this.width = 1;
   this.ctx = this.canvas.getContext('2d');
   this.speed = 10;
   this.direction = 0;
@@ -15,7 +16,7 @@ function Trump (canvas) {
 }
 
 Trump.prototype.draw = function () {
-  this.ctx.drawImage(this.img, this.x - this.size/2, this.y - this.size/2, this.size, this.size);
+  this.ctx.drawImage(this.img, this.x - this.size/2, this.y - this.size/2, this.size * this.width, this.size);
 }
 
 Trump.prototype.update = function () {
@@ -53,8 +54,17 @@ Trump.prototype.checkCollisionsWithAmerican = function (american) {
 
   const collisionsRightAmerican = this.x + this.size/2 > american.x - american.size/2;
   const collisionsLeftAmerican = this.x - this.size/2 < american.x + american.size/2;
-  const collisionsTopAmerican = this.y - this.size/2 < american.y + american.size/2;
-  const collisionsBottomAmerican = this.y + this.size/2 > american.y - american.size/2;
+  const collisionsTopAmerican = this.y - this.size/4 < american.y + american.size/2;
+  const collisionsBottomAmerican = this.y + this.size/4 > american.y - american.size/2;
 
   return collisionsRightAmerican && collisionsLeftAmerican && collisionsTopAmerican && collisionsBottomAmerican;
+};
+
+Trump.prototype.checkCollisionsWithSombrero = function (sombrero) {
+  const collisionsRightSombrero = this.x + this.size/2 > sombrero.x - sombrero.size/2;
+  const collisionsLeftSombrero = this.x - this.size/2 < sombrero.x + sombrero.size/2;
+  const collisionsTopSombrero = this.y - this.size/4 < sombrero.y + sombrero.size/2;
+  const collisionsBottomSombrero = this.y + this.size/4 > sombrero.y - sombrero.size/2;
+
+  return collisionsRightSombrero && collisionsLeftSombrero && collisionsTopSombrero && collisionsBottomSombrero;
 };
