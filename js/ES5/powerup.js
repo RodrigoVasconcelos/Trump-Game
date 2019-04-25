@@ -16,7 +16,7 @@ class Sombrero extends PowerUp {
     this.type = 'sombrero';
   }
 
-  draw() {
+  draw = () => {
     this.ctx.drawImage(this.img, this.x - this.size/2, this.y - this.size/2, this.size, this.size);
     this.y -=2;
   }
@@ -31,7 +31,7 @@ class Lives extends PowerUp {
     this.type = 'lives';
   }
 
-  draw() {
+  draw = () => {
     this.ctx.drawImage(this.img, this.x - this.size/2, this.y - this.size/2, this.size, this.size);
     this.y += 2;
   }

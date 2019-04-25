@@ -20,7 +20,7 @@ function main() {
     const splashScreen = buildDom(`
     <section  class="start-window">
     <div>
-    <img src="./img/Sem título-2-03.png" alt="">
+    <img src="./img/game-logo-03.svg" alt="">
     <input  class="start-button" type="button" value="Start">
     </div>
     </section>
@@ -84,7 +84,7 @@ function main() {
   function buildGameScreen() {
     const gameScreen = buildDom(`
     <header class="header">
-    <img class="logo" src="./img/Sem título-2-03.png" alt="Shall Not Pass">
+    <img class="logo" src="./img/game-logo-03." alt="Shall Not Pass">
     <div class="side-bar">
       <p>Lives:  <span class="lives-value">0</span></p>
       <p>Score: <span class="score-value">0000</span></p>
